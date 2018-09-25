@@ -2,7 +2,11 @@ package ch.planet9.asn1toy.view.bouncycastle.util;
 
 
         import java.io.IOException;
+        import java.nio.ByteBuffer;
+        import java.util.Arrays;
         import java.util.Enumeration;
+        import java.util.List;
+        import java.util.Vector;
 
         import org.bouncycastle.asn1.ASN1ApplicationSpecific;
         import org.bouncycastle.asn1.ASN1Boolean;
@@ -372,15 +376,25 @@ public class ASN1Dump
         String nl = Strings.lineSeparator();
         StringBuffer buf = new StringBuffer();
 
+        ByteBuffer bbuf = ByteBuffer.wrap(bytes);
+
         indent += TAB;
 
         buf.append(nl);
         for (int i = 0; i < bytes.length; i += SAMPLE_SIZE)
         {
+            //System.out.println("i="+Integer.toString(i)+"  bytes.length="+Integer.toString(bytes.length));
             if (bytes.length - i > SAMPLE_SIZE)
             {
                 buf.append(indent);
-                buf.append(Strings.fromByteArray(Hex.encode(bytes, i, SAMPLE_SIZE)));
+                byte[] slice = new byte[SAMPLE_SIZE];
+                bbuf.get(slice,0, SAMPLE_SIZE);
+
+                //buf.append(Strings.fromByteArray(Hex.encode(bytes, i, SAMPLE_SIZE)));
+                for (byte b : slice) {
+                    buf.append(String.format("%02X ", b));
+                }
+
                 buf.append("   |   ");
                 buf.append(calculateAscString(bytes, i, SAMPLE_SIZE));
                 buf.append(nl);
@@ -388,8 +402,13 @@ public class ASN1Dump
             else
             {
                 buf.append(indent);
-                buf.append(Strings.fromByteArray(Hex.encode(bytes, i, bytes.length - i)));
-                // fromByteArray: new String(asCharArray(bytes));
+                //buf.append(Strings.fromByteArray(Hex.encode(bytes, i, bytes.length - i)));
+                byte[] slice = new byte[bytes.length-i];
+                bbuf.get(slice,0, bytes.length-i);
+
+                for (byte b : slice) {
+                    buf.append(String.format("%02X ", b));
+                }
 
                 for (int j = bytes.length - i; j != SAMPLE_SIZE; j++)
                 {
