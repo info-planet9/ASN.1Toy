@@ -8,8 +8,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.JTextPane;
+
+import ch.planet9.asn1toy.view.bouncycastle.util.ASN1Dump;
 import org.bouncycastle.asn1.ASN1InputStream;
-import org.bouncycastle.asn1.util.ASN1Dump;
+//import org.bouncycastle.asn1.util.ASN1Dump;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
