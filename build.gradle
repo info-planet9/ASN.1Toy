@@ -39,7 +39,7 @@ dependencies {
 	compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.60'
 
 	// https://mvnrepository.com/artifact/net.sourceforge.mydoggy/mydoggy
-	compile group: 'net.sourceforge.mydoggy', name: 'mydoggy', version: '1.5.0-beta-r1389', ext: 'pom'
+	//compile group: 'net.sourceforge.mydoggy', name: 'mydoggy', version: '1.5.0-beta-r1389', ext: 'pom'
 	
 
 }
